@@ -26,32 +26,36 @@ import {
   HeartFilledIcon,
   SearchIcon,
 } from "@/components/icons";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
+  const router = useRouter();
   return (
     <NextUINavbar maxWidth="xl" position="sticky" className="h-28">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
-            <img src={"./next.svg"} className="h-16 w-16 p-2 object-contain" />
+            <img src={"/next.svg"} className="h-16 w-16 p-2 object-contain" />
             <p className="font-bold text-3xl">GoFund.Web3</p>
           </NextLink>
         </NavbarBrand>
         <div className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <NextLink
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </NextLink>
-            </NavbarItem>
-          ))}
+          {siteConfig.navItems
+            .filter((e) => router.pathname.includes(e.role))
+            .map((item) => (
+              <NavbarItem key={item.href}>
+                <NextLink
+                  className={clsx(
+                    linkStyles({ color: "foreground" }),
+                    "data-[active=true]:text-primary data-[active=true]:font-medium"
+                  )}
+                  color="foreground"
+                  href={item.href}
+                >
+                  {item.label}
+                </NextLink>
+              </NavbarItem>
+            ))}
         </div>
       </NavbarContent>
       <NavbarContent
@@ -78,8 +82,8 @@ export const Navbar = () => {
       </NavbarContent>
 
       <NavbarMenu>
-        <div className="mx-4 mt-6 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
+        <div className="mx-4 mt-10 flex flex-col gap-2">
+          {siteConfig.navMenuItems.filter((e) => router.pathname.includes(e.role)).map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
                 color={
