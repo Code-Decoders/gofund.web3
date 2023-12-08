@@ -18,7 +18,6 @@ import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 
-import { ThemeSwitch } from "@/components/theme-switch";
 import {
   TwitterIcon,
   GithubIcon,
@@ -26,8 +25,10 @@ import {
   HeartFilledIcon,
   SearchIcon,
 } from "@/components/icons";
+import { useRouter } from "next/router";
 
 export const Navbar = () => {
+  const router = useRouter();
   return (
     <NextUINavbar maxWidth="xl" position="sticky" className="h-28">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -58,7 +59,9 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <Button color="primary">Connect Wallet</Button>
+        <Button color="primary" onClick={() => router.push("/login")}>
+          Login
+        </Button>
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
@@ -97,7 +100,9 @@ export const Navbar = () => {
             </NavbarMenuItem>
           ))}
           <NavbarMenuItem className="h-10">
-            <Button color="primary">Connect Wallet</Button>
+            <Button color="primary" onClick={() => router.push("/login")}>
+              Login
+            </Button>
           </NavbarMenuItem>
         </div>
       </NavbarMenu>
