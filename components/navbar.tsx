@@ -19,7 +19,6 @@ import { siteConfig } from "@/config/site";
 import NextLink from "next/link";
 import clsx from "clsx";
 
-import { ThemeSwitch } from "@/components/theme-switch";
 import {
   TwitterIcon,
   GithubIcon,
@@ -74,19 +73,9 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        {address ? (
-          <Chip>{(address as String).substring(0,9)}...</Chip>
-        ) : (
-          <Button
-            color="primary"
-            onClick={() => {
-              connectWallet();
-            }}
-          >
-            Connect Wallet
-          </Button>
-        )}
-
+        <Button color="primary" onClick={() => router.push("/login")}>
+          Login
+        </Button>
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
@@ -127,18 +116,9 @@ export const Navbar = () => {
               </NavbarMenuItem>
             ))}
           <NavbarMenuItem className="h-10">
-            {address ? (
-              <Chip>{(address as String).substring(0,9)}...</Chip>
-            ) : (
-              <Button
-                color="primary"
-                onClick={() => {
-                  connectWallet();
-                }}
-              >
-                Connect Wallet
-              </Button>
-            )}
+            <Button color="primary" onClick={() => router.push("/login")}>
+              Login
+            </Button>
           </NavbarMenuItem>
         </div>
       </NavbarMenu>
