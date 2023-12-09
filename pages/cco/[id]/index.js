@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import DefaultLayout from '@/layouts/default'
 import { useRouter } from 'next/router'
-import { Button,ButtonGroup, Card, CardBody, Chip, Image, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
+import { Button, ButtonGroup, Card, CardBody, Chip, Image, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { MdCatalog, MdPreview } from 'md-editor-rt'
 import useWeb3 from '@/lib/useWeb3'
+import axios from 'axios'
 
 const DetailPage = () => {
   const router = useRouter()
@@ -14,7 +15,7 @@ const DetailPage = () => {
 
   const [data, setData] = useState()
 
-  const { getCCO, provider, invest, networks } = useWeb3()
+  const { getCCO, provider, invest, networks, safeMint } = useWeb3()
 
   useEffect(() => {
     if (provider)
@@ -27,6 +28,23 @@ const DetailPage = () => {
       tokenAddress: data.tokenAddress,
       usdcAmount: (quantity * data.initalValue).toString()
     })
+
+    const imageResponse = await axios.request({
+      method: 'GET',
+      url: '/api/createimage',
+      headers: {
+        'content-type': 'application/json',
+      },
+      params: {
+        name: data.productName,
+        num: data.totalToken,
+        tokenText: data.tokenAddress
+      }
+    })
+
+    const imageCID = imageResponse.data.data.Hash;
+    await safeMint({ uri: "https://gateway.lighthouse.storage/ipfs/" + imageCID })
+
     setOpen(false)
   }
 
