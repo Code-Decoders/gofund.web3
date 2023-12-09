@@ -29,10 +29,25 @@ const CreatePage = () => {
     const [tokenAddress, setTokenAddress] = useState("");
     const [id] = useState("preview-only");
     const [network, setNetwork] = useState("");
-    const { networks, createCCO } = useWeb3();
+    const { networks, createCCO, getTokenName } = useWeb3();
 
     const onSubmit = async () => {
-        console.log('axios send')
+
+        const imageResponse = await axios.request({
+            method: 'GET',
+            url: '/api/createimage',
+            headers: {
+                'content-type': 'application/json',
+            },
+            params: {
+                name: productName,
+                num: totalToken,
+                tokenText: getTokenName(tokenAddress)
+            }
+        })
+
+        const imageCID = imageResponse.data.data.Hash;
+        
         const response = await axios.request({
             method: 'POST',
             url: '/api/lighthouse',
@@ -52,6 +67,7 @@ const CreatePage = () => {
                 logo,
                 totalToken,
                 initalValue,
+                image: imageCID,
             }
         })
 
