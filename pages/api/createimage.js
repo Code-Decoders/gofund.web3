@@ -1,4 +1,5 @@
 import Jimp from "jimp";
+import lighthouse from "@lighthouse-web3/sdk";
 
 const customFontSizeName = 60;
 const customFontSizeNum = 40;

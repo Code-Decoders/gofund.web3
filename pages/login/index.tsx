@@ -7,7 +7,11 @@ import {
   EventType,
   ServiceStatus,
 } from "@metamask/sdk-communication-layer";
-import { AnonAadhaarProof, LogInWithAnonAadhaar, useAnonAadhaar } from "anon-aadhaar-react";
+import {
+  AnonAadhaarProof,
+  LogInWithAnonAadhaar,
+  useAnonAadhaar,
+} from "anon-aadhaar-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -46,8 +50,8 @@ export default function LoginPage() {
     const doAsync = async () => {
       const clientSDK = new MetaMaskSDK({
         extensionOnly: true,
-        forceInjectProvider: true,
-        preferDesktop: false,
+        // forceInjectProvider: true,
+        // preferDesktop: false,
 
         communicationServerUrl: process.env.NEXT_PUBLIC_COMM_SERVER_URL,
         checkInstallationImmediately: true,
