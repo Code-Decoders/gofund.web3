@@ -9,7 +9,7 @@ const generateImage = async (name, num, tokenText) => {
     const width = 400;
     const height = 400;
 
-    const img = await Jimp.read('/Users/anshulbhartiya/Desktop/Eth Project/sample2.jpeg');
+    const img = await Jimp.read('pages/api/sample2.jpeg');
 
     const font1 = await Jimp.loadFont(Jimp.FONT_SANS_64_BLACK);
     const font2 = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK);
