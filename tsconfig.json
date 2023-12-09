@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/company/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/company/index.js", "components/cart/add-to-cart.js", "components/cart/close-cart.js", "components/cart/delete-item-button.js", "components/cart/modal.jsx", "components/cart/open-cart.js", "components/cart/edit-item-quantity-button.jsx"],
   "exclude": ["node_modules"]
 }

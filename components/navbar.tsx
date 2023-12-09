@@ -10,6 +10,7 @@ import {
   NavbarBrand,
   NavbarItem,
   NavbarMenuItem,
+  Chip,
 } from "@nextui-org/react";
 
 import { link as linkStyles } from "@nextui-org/theme";
@@ -27,9 +28,20 @@ import {
   SearchIcon,
 } from "@/components/icons";
 import { useRouter } from "next/router";
+import useWeb3 from "@/lib/useWeb3";
+import { useMemo } from "react";
 
 export const Navbar = () => {
   const router = useRouter();
+  const { web3, connectWallet, account, changeNetwork } = useWeb3();
+
+  const address = useMemo(() => {
+    if (web3) {
+      return account;
+    }
+    return null;
+  }, [web3, account]);
+
   return (
     <NextUINavbar maxWidth="xl" position="sticky" className="h-28">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
@@ -62,7 +74,19 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <Button color="primary">Connect Wallet</Button>
+        {address ? (
+          <Chip>{(address as String).substring(0,9)}...</Chip>
+        ) : (
+          <Button
+            color="primary"
+            onClick={() => {
+              connectWallet();
+            }}
+          >
+            Connect Wallet
+          </Button>
+        )}
+
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
@@ -83,25 +107,38 @@ export const Navbar = () => {
 
       <NavbarMenu>
         <div className="mx-4 mt-10 flex flex-col gap-2">
-          {siteConfig.navMenuItems.filter((e) => router.pathname.includes(e.role)).map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                    ? "danger"
-                    : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
+          {siteConfig.navMenuItems
+            .filter((e) => router.pathname.includes(e.role))
+            .map((item, index) => (
+              <NavbarMenuItem key={`${item}-${index}`}>
+                <Link
+                  color={
+                    index === 2
+                      ? "primary"
+                      : index === siteConfig.navMenuItems.length - 1
+                      ? "danger"
+                      : "foreground"
+                  }
+                  href="#"
+                  size="lg"
+                >
+                  {item.label}
+                </Link>
+              </NavbarMenuItem>
+            ))}
           <NavbarMenuItem className="h-10">
-            <Button color="primary">Connect Wallet</Button>
+            {address ? (
+              <Chip>{(address as String).substring(0,9)}...</Chip>
+            ) : (
+              <Button
+                color="primary"
+                onClick={() => {
+                  connectWallet();
+                }}
+              >
+                Connect Wallet
+              </Button>
+            )}
           </NavbarMenuItem>
         </div>
       </NavbarMenu>

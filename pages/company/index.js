@@ -6,7 +6,7 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
-import CCOCard from "@/components/cco-card"
+import CCOCard from "@/components/cards/cco-card"
 import { Button, Card, CardHeader, Image } from "@nextui-org/react";
 
 export default function IndexPage() {

@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { Button, Card, CardBody, Input, Textarea } from "@nextui-org/react";
+import { Autocomplete, AutocompleteItem, Button, Card, CardBody, Input, Textarea } from "@nextui-org/react";
 import DefaultLayout from '@/layouts/default'
 import { MdPreview, MdCatalog, MdEditor } from 'md-editor-rt';
 import 'md-editor-rt/lib/preview.css';
 import 'md-editor-rt/lib/style.css';
+import useWeb3 from '@/lib/useWeb3'
 
 
 
@@ -15,7 +16,10 @@ const CreatePage = () => {
     const [totalToken, setTotalToken] = useState(0)
     const [description, setDescription] = useState("# Hello Editor")
     const [initalValue, setInitialValue] = useState(0)
+    const [tokenAddress, setTokenAddress] = useState("")
     const [id] = useState('preview-only');
+    const [network, setNetwork] = useState('')
+    const { networks } = useWeb3()
 
     const onSubmit = () => {
     }
@@ -49,7 +53,7 @@ const CreatePage = () => {
                         />
                         <Input
                             isRequired
-                            type="Comapny Name"
+                            type="Company Name"
                             label="Company Name"
                             placeholder='Enter the company name'
                             className="max-w-xl mb-4"
@@ -57,6 +61,9 @@ const CreatePage = () => {
                                 setCompanyName(e.target.value);
                             }}
                         />
+                    </div>
+                    <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col mb-4">
+                        <MdEditor language='en-US' modelValue={description} className='md-4' theme='dark' onChange={setDescription} />
                     </div>
                     <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col">
                         <Input
@@ -79,6 +86,30 @@ const CreatePage = () => {
                                 setWebsiteUri(e.target.value);
                             }}
                         />
+                    </div>
+                    <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col">
+                        <Input
+                            isRequired
+                            type="text"
+                            label="Token Address"
+                            placeholder='Enter the Token Contract Address'
+                            className="mb-4"
+                            onChange={(e) => {
+                                setTokenAddress(e.target.value);
+                            }}
+                        />
+                        <Autocomplete
+                            label="Network"
+                            placeholder="Select Network"
+                            defaultItems={Object.entries(networks)}
+                            scrollShadowProps={{
+                                isEnabled: false
+                            }}
+                            selectedKey={network}
+                            onSelectionChange={setNetwork}
+                        >
+                            {(item) => <AutocompleteItem key={item[0]}>{item[1].chainName}</AutocompleteItem>}
+                        </Autocomplete>
                     </div>
                     <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col">
                         <Input
@@ -124,15 +155,12 @@ const CreatePage = () => {
                             }}
                         />
                     </div>
-                    <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col md-4">
-                        <MdEditor language='en-US' modelValue={description} className='md-4' theme='dark' onChange={setDescription} />
-                    </div>
                     <div className="flex w-full gap-x-5 gap-y-1 max-sm:flex-col">
                         <Input
                             isRequired
                             type="number"
-                            label="Initial Value per token"
-                            placeholder='Enter the initial value per token'
+                            label="Initial Value per token (in USDC)"
+                            placeholder='Enter the initial value per token (in USDC)'
                             className="max-w-xl mb-4"
                             onChange={(e) => {
                                 setInitialValue(e.target.value);
@@ -140,6 +168,7 @@ const CreatePage = () => {
                         />
                         <Input
                             isRequired
+                            disabled
                             type="number"
                             label="Total Value"
                             placeholder='Enter the total value'
@@ -147,6 +176,7 @@ const CreatePage = () => {
                             value={totalToken * initalValue}
                         />
                     </div>
+
                     <Button color="primary" size="md" onClick={onSubmit} >
                         Save
                     </Button>
