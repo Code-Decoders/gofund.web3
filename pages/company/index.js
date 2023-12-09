@@ -1,13 +1,5 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 import CCOCard from "@/components/cards/cco-card"
-import { Button, Card, CardHeader, Image } from "@nextui-org/react";
 import useWeb3 from "@/lib/useWeb3";
 import { useEffect, useState } from 'react'
 
@@ -29,7 +21,8 @@ export default function IndexPage() {
 						return <CCOCard key={i} cco={{
 							title: e.productName,
 							creator: e[0],
-							image: e[1]
+							image: e[1],
+							tokenAddress: e.tokenAddress
 						}} />
 					})
 				}

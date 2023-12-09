@@ -29,10 +29,13 @@ import {
 import { useRouter } from "next/router";
 import useWeb3 from "@/lib/useWeb3";
 import { useMemo } from "react";
+import { useEffect } from "react";
 
 export const Navbar = () => {
   const router = useRouter();
-  const { web3, account, changeNetwork } = useWeb3();
+  const { mint, provider, account } = useWeb3();
+
+  
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky" className="h-28">
