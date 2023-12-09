@@ -4,19 +4,19 @@ import { Head } from "./head";
 import { useTheme } from "next-themes";
 
 export default function DefaultLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	const {theme, setTheme} = useTheme()
-	setTheme('dark')
-	return (
-		<div className="relative flex flex-col h-screen">
-			<Head />
-			<Navbar />
-			<main className="dark container mx-auto max-w-7xl px-6 flex-grow">
-				{children}
-			</main>
-		</div>
-	);
+  const { theme, setTheme } = useTheme();
+  setTheme("dark");
+  return (
+    <div className="relative flex flex-col h-screen">
+      <Head />
+      <Navbar />
+      <main className="dark container mx-auto max-w-7xl px-6 flex-grow">
+        <div className="flex flex-col items-center w-full p-10">{children}</div>
+      </main>
+    </div>
+  );
 }

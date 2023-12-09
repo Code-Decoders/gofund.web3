@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.header {
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+}
+
+
+.updateRow {
+    display: flex;
+    gap: 10px;
+}
+
+.builderContainer {
+    padding: 10px;
+    display: flex;
+}

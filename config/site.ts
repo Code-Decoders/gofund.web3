@@ -5,51 +5,47 @@ export const siteConfig = {
 	description: "Make beautiful websites regardless of your design experience.",
 	navItems: [
 		{
-			label: "Home",
-			href: "/",
+			label: "Dashboard",
+			href: "/company/",
+			role: "company"
 		},
 		{
 			label: "Create",
-			href: "/create",
+			href: "/company/create",
+			role: "company"
 		},
-		// {
-		// 	label: "Pricing",
-		// 	href: "/pricing",
-		// },
-		// {
-		// 	label: "Blog",
-		// 	href: "/blog",
-		// },
-		// {
-		// 	label: "About",
-		// 	href: "/about",
-		// }
+		{
+			label: "Home",
+			href: "/user/",
+			role: "user"
+		},
+		{
+			label: "Portfolio",
+			href:"/user/portfolio",
+			role: "user",
+		}
 	],
 	navMenuItems: [
 		{
-			label: "Home",
-			href: "/",
+			label: "Dashboard",
+			href: "/company/",
+			role: "company"
 		},
 		{
 			label: "Create",
-			href: "/create",
+			href: "/company/create",
+			role: "company"
 		},
-		// {
-		// 	label: "Projects",
-		// 	href: "/projects",
-		// },
-		// {
-		// 	label: "Team",
-		// 	href: "/team",
-		// },
-		// {
-		// 	label: "Calendar",
-		// 	href: "/calendar",
-		// },
-		// {
-		// 	label: "Settings",
-		// 	href: "/settings",
-		// },
+		{
+			label: "Home",
+			href: "/user/",
+			role: "user"
+		},
+		{
+			label: "Portfolio",
+			href:"/user/portfolio",
+			role: "user",
+		}
 	],
 	links: {
 		github: "https://github.com/Code-Decoders",
