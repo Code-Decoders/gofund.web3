@@ -32,14 +32,7 @@ import { useMemo } from "react";
 
 export const Navbar = () => {
   const router = useRouter();
-  // const { web3, connectWallet, account, changeNetwork } = useWeb3();
-
-  // const address = useMemo(() => {
-  //   if (web3) {
-  //     return account;
-  //   }
-  //   return null;
-  // }, [web3, account]);
+  const { web3, account, changeNetwork } = useWeb3();
 
   return (
     <NextUINavbar maxWidth="xl" position="sticky" className="h-28">
@@ -73,9 +66,13 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        {/* {address ? <Chip>{address}</Chip>:<Button color="primary" onClick={() => router.push("/login")}>
-          Login
-        </Button>} */}
+        {account ? (
+          <Chip>{account.substring(0, 9)}...</Chip>
+        ) : (
+          <Button color="primary" onClick={() => router.push("/login")}>
+            Login
+          </Button>
+        )}
         <NavbarItem className="hidden sm:flex gap-2">
           <Link isExternal href={siteConfig.links.twitter}>
             <TwitterIcon className="text-default-500" />
@@ -116,9 +113,13 @@ export const Navbar = () => {
               </NavbarMenuItem>
             ))}
           <NavbarMenuItem className="h-10">
-           {/* {address ? <Chip>{address}</Chip> : <Button color="primary" onClick={() => router.push("/login")}>
-              Login
-            </Button>} */}
+            {account ? (
+              <Chip>{account.substring(0, 9)}...</Chip>
+            ) : (
+              <Button color="primary" onClick={() => router.push("/login")}>
+                Login
+              </Button>
+            )}
           </NavbarMenuItem>
         </div>
       </NavbarMenu>
