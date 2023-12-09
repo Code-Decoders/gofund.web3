@@ -19,9 +19,34 @@ const CreatePage = () => {
     const [tokenAddress, setTokenAddress] = useState("")
     const [id] = useState('preview-only');
     const [network, setNetwork] = useState('')
-    const { networks } = useWeb3()
+    const { networks, createCCO } = useWeb3()
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
+        const response = await fetch('/api/lighthouse', {
+            Method: 'POST',
+            Headers: {
+              Accept: 'application.json',
+              'Content-Type': 'application/json'
+            },
+            Body: {
+                productName,
+                companyName,
+                whitepaperUri,
+                websiteUri,
+                totalToken,
+                description,
+                initalValue,
+                tokenAddress,
+            },
+          })
+
+        createCCO({
+            tokenAddress:"",
+            cid: "",
+            totalToken: "",
+            tokenRate: "",
+            endAt: ""
+        })
     }
     return (
 
