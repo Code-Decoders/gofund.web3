@@ -17,7 +17,8 @@ const CCOCard = ({cco}) => {
                 removeWrapper
                 alt="Card background"
                 className="z-0 w-full h-full object-cover "
-                src={"https://gateway.lighthouse.storage/ipfs/" + cco.image}
+                src="https://analyticsindiamag.com/wp-content/uploads/2020/01/top-10-DS-projects.png"
+
             />
         </Card>
     )

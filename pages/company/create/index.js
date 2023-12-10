@@ -29,7 +29,7 @@ const CreatePage = () => {
     const [tokenAddress, setTokenAddress] = useState("");
     const [id] = useState("preview-only");
     const [network, setNetwork] = useState("");
-    const { networks, createCCO, getTokenName } = useWeb3();
+    const { networks, createCCO } = useWeb3();
 
     const onSubmit = async () => {
 
@@ -42,7 +42,7 @@ const CreatePage = () => {
             params: {
                 name: productName,
                 num: totalToken,
-                tokenText: getTokenName(tokenAddress)
+                tokenText: "TEST"
             }
         })
 
