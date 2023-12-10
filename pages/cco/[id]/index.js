@@ -15,7 +15,7 @@ const DetailPage = () => {
 
   const [data, setData] = useState()
 
-  const { getCCO, provider, invest, networks, safeMint } = useWeb3()
+  const { getCCO, provider, invest, networks, safeMint, changeNetwork } = useWeb3()
 
   useEffect(() => {
     if (provider)
@@ -24,6 +24,9 @@ const DetailPage = () => {
 
 
   const onInvest = async () => {
+    await changeNetwork({
+      chainId: data.network
+    })
     await invest({
       tokenAddress: data.tokenAddress,
       usdcAmount: (quantity * data.initalValue).toString()
@@ -44,7 +47,7 @@ const DetailPage = () => {
 
     const imageCID = imageResponse.data.data.Hash;
     await safeMint({ uri: "https://gateway.lighthouse.storage/ipfs/" + imageCID })
-
+    getCCO({ tokenAddress: tokenAddress }).then(val => setData(val))
     setOpen(false)
   }
 
