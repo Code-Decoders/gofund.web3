@@ -5,11 +5,11 @@ import useWeb3 from "@/lib/useWeb3"
 
 const PortfolioPage = () => {
     const [data, setData] = useState([])
-    const { getAllNFTs, provider } = useWeb3()
+    const { getNFTs, provider } = useWeb3()
 
     useEffect(() => {
         if (provider)
-            getAllNFTs().then(val => {
+            getNFTs().then(val => {
                 console.log(val)
             })
     }, [provider])

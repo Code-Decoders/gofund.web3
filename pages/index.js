@@ -2,7 +2,9 @@ import React from 'react'
 
 const IndexPage = () => {
   return (
-    <div>IndexPage</div>
+    <div>
+      <iframe src="https://abdulhaadiglsbca22.wixsite.com/my-site-2" className='w-full h-[100vh]'/>
+    </div>
   )
 }
 
